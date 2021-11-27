@@ -21,3 +21,10 @@ services:
     ports:
     - target: 5002
       published: 5002
+  service1:
+    container_name: service1
+    build: ./service1
+    image: python-service1:latest
+    ports:
+    - target: 6000
+      published: 6000
