@@ -23,31 +23,28 @@ def race():
     animal = race[winner]
     race.append(animal)
 
-#    return f"{challenger[0]} {challenger[1]} {challenger[2]} {challenger[3]} {challenger[4]} {challenger[5]} {challenger[6]} {challenger[7]}, the winner is {challenger[winner]} "
     return jsonify({'racelist':race})
 
 
-@app.route("/racelist", method=['POST'])
+@app.route("/racelist", methods=['POST'])
 def racelist():
     rawstring = request.get_json()['rawstring']
-
+    first= rawstring[0]
 
     i=0
     race=[]
     while i<8:
         rand=rawstring[i]
-        m=int(rand.text[0])
-        n=int(rand.text[1])
+        m=int(rand[0])
+        n=int(rand[1])
         animal=adjective[m]+' '+colour[n]
         race.append(animal)
         i+=1
-    winnertext=rawstring[8]
-    winner= int(winnertext.text)    
+    winner= int(rawstring[8])    
 
     animal = race[winner]
     race.append(animal)
     return jsonify({'racelist':race})
-
 
     
 

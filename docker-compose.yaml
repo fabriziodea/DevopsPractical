@@ -1,5 +1,12 @@
 version: '3.7'
 services:
+  service1:
+    container_name: service1
+    build: ./service1
+    image: python-service1:latest
+    ports:
+    - target: 6000
+      published: 6000
   service4:
     container_name: service4
     build: ./service4
