@@ -1,11 +1,23 @@
-from flask import Flask
+from flask import Flask, jsonify
 from random import randint
+import json
 
 
 adjective=["mean", "friendly", "aggressive", "smart", "quiet", "noisy", "dangerous", "stubborn", "dirty", "solitary"]
 colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", "blue", "black"]
 
-namesn= str(randint(0,9))+str(randint(0,9))
+porco = {"porco":colour}
+json= json.dumps(porco)
+
+print(json)
+
+
+
+
+
+
+
+"""namesn= str(randint(0,9))+str(randint(0,9))
 challenger=[]
 
 print(namesn)
@@ -19,4 +31,4 @@ while i<8:
     challenger.append(donkey)
     print(donkey)
     i+=1
-
+"""

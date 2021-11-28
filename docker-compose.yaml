@@ -5,15 +5,15 @@ services:
     build: ./service1
     image: python-service1:latest
     ports:
-    - target: 6000
-      published: 6000
+    - target: 5000
+      published: 5000
   service4:
     container_name: service4
     build: ./service4
     image: python-service4:latest
     ports:
-    - target: 5000
-      published: 5000
+    - target: 6000
+      published: 6000
   service2:
     container_name: service2
     build: ./service2
@@ -28,10 +28,3 @@ services:
     ports:
     - target: 5002
       published: 5002
-  service1:
-    container_name: service1
-    build: ./service1
-    image: python-service1:latest
-    ports:
-    - target: 6000
-      published: 6000

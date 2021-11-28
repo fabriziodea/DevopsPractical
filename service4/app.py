@@ -28,7 +28,12 @@ def race():
 
 @app.route("/racelist", methods=['POST'])
 def racelist():
-    rawstring = request.get_json()['rawstring']
+#    rawstring = request.get_json()['rawstring']
+    mydict = request.getjson()
+    
+
+
+    rawstring
     first= rawstring[0]
 
     i=0
@@ -51,4 +56,4 @@ def racelist():
 
 
 if __name__=="__main__":
-	app.run(host = "0.0.0.0", port = 5000, debug = True)
+	app.run(host = "0.0.0.0", port = 6000, debug = True)
