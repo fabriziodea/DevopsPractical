@@ -7,11 +7,15 @@ adjective=["mean", "friendly", "aggressive", "smart", "quiet", "noisy", "dangero
 colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", "blue", "black"]
 
 porco = {"porco":colour}
-json= json.dumps(porco)
 
-print(json)
-
-
+mydict={"1":"11", "2":"22", "3":"33", "4":"34", "5":"55", "6":"86", "7":"77", "8":"88", "9":"0"}
+print(mydict)
+#dump=json.dumps(mydict)
+#print(dump)
+load=json.loads(mydict)
+print(load)
+#loadump=json.load(dump)
+#print(loadump)
 
 
 

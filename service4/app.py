@@ -6,50 +6,41 @@ colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", 
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/raceporco", methods=['POST'])
 def race():
-    i=0
-    race=[]
-    while i<8:
-        rand=requests.get("http://service2:5001/randomnames")
-        m=int(rand.text[0])
-        n=int(rand.text[1])
-        animal=adjective[m]+' '+colour[n]
-        race.append(animal)
-        i+=1
-    winnertext=requests.get("http://service3:5002/winner")
-    winner= int(winnertext.text)    
+    mydict = request.get_json()
+    mydict.update({'dio': 'madonna'})
 
-    animal = race[winner]
-    race.append(animal)
-
-    return jsonify({'racelist':race})
+    return jsonify(mydict)
 
 
 @app.route("/racelist", methods=['POST'])
 def racelist():
 #    rawstring = request.get_json()['rawstring']
-    mydict = request.getjson()
+    mydict = request.get_json()
     
+#    first= rawstring[0]
 
-
-    rawstring
-    first= rawstring[0]
-
-    i=0
+    i=1
     race=[]
-    while i<8:
-        rand=rawstring[i]
+    myzip=[]
+    while i<9:
+#        rand=rawstring[i]
+        rand= mydict[str(i)]
         m=int(rand[0])
         n=int(rand[1])
         animal=adjective[m]+' '+colour[n]
         race.append(animal)
+        myzip.append(str(i))
         i+=1
-    winner= int(rawstring[8])    
 
+#    winner= int(rawstring[8])
+    winner = int(mydict[str(9)]) 
+    myzip.append(str(9))   
     animal = race[winner]
     race.append(animal)
-    return jsonify({'racelist':race})
+    newdict=dict(zip(myzip,race))
+    return jsonify(newdict)
 
     
 

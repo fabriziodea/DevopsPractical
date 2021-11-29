@@ -13,27 +13,33 @@ racers=[]
 #@app.route("/") #prova
 def race():
     myzip=[]
-    for i in range(1,8): 
+    mydict={}
+    for i in range(1,9): 
         racer=requests.get("http://service2:5001/randomnames")
-#        racer=str(i*11) #prova
+#        racer=str(i*9) #prova
         racers.append(racer)
         myzip.append(str(i))
+        mydict.update({str(i): racer})
     winner=requests.get("http://service3:5002/winner")
-#    winner='6' #prova
-    #winner is text
+#    winner= str(5) #prova
+
     racers.append(winner)
     myzip.append(str(9))
-#    print(*racers) #prova
-    mydict=dict(zip(myzip,racers))
+    mydict.update({str(9):winner})
 
-#    mydict={"rawstring":racers}
-#    myjson= json.dumps(mydict)
+#    jsonpost=json.dumps(mydict)
+
+#    mydict=dict(zip(myzip,racers))
+#    mydict={"1":"11", "2":"22", "3":"33", "4":"34", "5":"55", "6":"86", "7":"77", "8":"88", "9":"0"}
+#    mydict={myzip[0]:racers[0],myzip[1]:racers[1],myzip[2]:racers[2],myzip[3]:racers[3],myzip[4]:racers[4],myzip[5]:racers[5],myzip[6]:racers[6],myzip[7]:racers[7],myzip[8]:racers[8]}
     response = requests.post("http://service4:6000/racelist", json=mydict)
-    racenames=response.json()["racelist"]
-#    racenames=racers #prova
+#    response = requests.post("http://service4:6000/raceporco", json=mydict)
 
+    racedict=response.json()
 
-    return render_template("racepage.html", records=racenames)
+#    return newdict["dio"]
+    return render_template("racepage.html", records=racedict.values())
+#    return render_template("racepage.html", records=racenames)
 
 #@app.route("/results/<int:bet>", methods=["GET", "POST"])
 #def results(bet):
