@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import requests
 
-adjective=["mean", "friendly", "aggressive", "smart", "quiet", "noisy", "dangerous", "stubborn", "dirty", "solitary"]
+adjective=["Mean", "Friendly", "Aggressive", "Smart", "Quiet", "Noisy", "Dangerous", "Stubborn", "Dirty", "Solitary"]
 colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", "blue", "black"]
 
 app = Flask(__name__)

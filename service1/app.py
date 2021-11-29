@@ -15,22 +15,22 @@ def race():
     global racedict
     global winnername
     for i in range(1,9): 
-#        racer=requests.get("http://service2:5001/randomnames")
-        racer=str(i*9) #prova
-        mydict.update({str(i): racer}) #prova
-#        mydict.update({str(i): racer.text})
+        racer=requests.get("http://service2:5001/randomnames")
+#        racer=str(i*9) #prova
+#        mydict.update({str(i): racer}) #prova
+        mydict.update({str(i): racer.text})
 
-#    winner=requests.get("http://service3:5002/winner")
-    winner= str(5) #prova
+    winner=requests.get("http://service3:5002/winner")
+#    winner= str(5) #prova
 
-#    mydict.update({str(9):winner.text})
-    mydict.update({str(9):winner}) #prova
+    mydict.update({str(9):winner.text})
+#    mydict.update({str(9):winner}) #prova
 
-#    response = requests.post("http://service4:6000/racelist", json=mydict)
+    response = requests.post("http://service4:6000/racelist", json=mydict)
 #    response = requests.post("http://service4:6000/raceporco", json=mydict)
 
-    racedict=mydict #prova
-#    racedict=response.json()
+#    racedict=mydict #prova
+    racedict=response.json()
     winnername=racedict.pop('9')
 
 
