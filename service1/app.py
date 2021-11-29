@@ -10,22 +10,21 @@ racers=[]
 
 
 @app.route("/", methods = ["GET", "POST"])
-#@app.route("/") #prova
 def race():
-    myzip=[]
     mydict={}
     for i in range(1,9): 
         racer=requests.get("http://service2:5001/randomnames")
 #        racer=str(i*9) #prova
-        racers.append(racer)
+        racers.append(racer.text)
         myzip.append(str(i))
-        mydict.update({str(i): racer})
+
+        mydict.update({str(i): racer.text})
     winner=requests.get("http://service3:5002/winner")
 #    winner= str(5) #prova
 
-    racers.append(winner)
+    racers.append(winner.text)
     myzip.append(str(9))
-    mydict.update({str(9):winner})
+    mydict.update({str(9):winner.text})
 
 #    jsonpost=json.dumps(mydict)
 
