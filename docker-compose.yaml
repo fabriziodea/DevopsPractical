@@ -1,9 +1,17 @@
-version: '3.7'
+version: '3.8'
 services:
+  db:
+    container_name: fabsql
+    image: fabsql:latest
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
   service1:
     container_name: service1
     build: ./service1
     image: python-service1:latest
+    environment:
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
     - target: 5000
       published: 5000

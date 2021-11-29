@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+    <head>
+        <style>
+p1 {
+        font-family: Arial, Helvetica, sans-serif; font-size: 40px;
+      }
+
+
+p2 {
+        font-family: Arial, Helvetica, sans-serif;  font-size: 20px;
+      }
+
+.button {
+  background-color: #808000;
+  border: none;
+  color: white;
+  padding: 15px 82px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+ul {
+ font-family: Arial, Helvetica, sans-serif;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #808000;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 20px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #CD853F;
+}
+
+table {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-size: 16px;
+  
+}
+
+th {
+  height: 40px;
+  background-color: #b3ffcc;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+}
+
+tr:hover {background-color: #90EE90;}
+
+body {
+  background-color: #00FFFF;
+}
+
+</style>
+</head>
+
+
+
+<body>
+    <ul>
+      <li><a class="active" href="{{url_for('race')}}">Hall of fame</a></li>
+    </ul>
+    <br><br>
+    <center>
+        <p1><b>Donkey Race</b></p1>
+        </center>
+        <br><br>
+
+
+<table>
+        {%  for record in records %} 
+        <tr>
+                <td>  {{record.raceno}}  </td>
+                <td> {{record.name}}</td>
+
+              </tr>
+        
+                {% endfor %}
+
+              </table>
+              <br><br>
+
+
+              </body>
+              </html>

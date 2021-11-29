@@ -1,9 +1,33 @@
 from flask import Flask, render_template, request, redirect, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from os import getenv
 import requests
 import json
 
 
 app = Flask(__name__)
+db = SQLAlchemy(app)
+
+# Replace [PASSWORD] with the root password for your mysql container
+password = getenv("DATABASE_PASSWORD")
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{password}@fabsql:3306/fives'
+
+class Winners(db.Model):
+	raceno = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(30), nullable=False)
+    def __repr__(self):
+        return ''.join(['race number: ', str(self.raceno), '\r\n', 'Winner: 'self.name, '\n'])
+
+
+@app.route('/')
+def hello():
+  data1 = Winners.query.all()
+  return render_template('hall.html', data1=data1)
+
+if __name__=='__main__':
+  app.run(host='0.0.0.0', port=5000, debug=True)
+
+
 
 
 racedict={}
