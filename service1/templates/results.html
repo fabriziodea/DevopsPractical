@@ -61,6 +61,7 @@ th {
 }
 td {
   text-align: center;
+  padding: 15px
   border-bottom: 2px solid #ddd;
 }
 
@@ -74,9 +75,12 @@ body {
     </style>
 </head>
 
+
+
 <body>
     <ul>
-      <li><a class="active" href="{{url_for('race')}}">Hall of fame</a></li>
+      <li><a class="active" href="http://www.google.com/">Hall of fame</a></li>
+      <li><a class="active" href="{{url_for('race')}}">Play Again</a></li>
     </ul>
     <br><br>
     <center>
@@ -88,8 +92,7 @@ body {
 <table>
         {%  for record in records %} 
         <tr>
-                <td>  A {{record}} Donkey  </td>
-                <td> <a href="{{ url_for('results', bet = record) }}" class="button">BET</a> </td>
+                <td>  The {{record}} Donkey  </td>
 
               </tr>
         
@@ -97,7 +100,10 @@ body {
 
               </table>
               <br><br>
-
+              <center>
+              <h2>{{message}}</h2>
+              <h2>The winner is {{name}}</h2>
+              </center>
 
               </body>
               </html>

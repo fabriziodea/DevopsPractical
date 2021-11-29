@@ -6,47 +6,45 @@ import json
 app = Flask(__name__)
 
 
-racers=[]
-
+racedict={}
+winnername=""
 
 @app.route("/", methods = ["GET", "POST"])
 def race():
     mydict={}
+    global racedict
+    global winnername
     for i in range(1,9): 
-        racer=requests.get("http://service2:5001/randomnames")
-#        racer=str(i*9) #prova
-        racers.append(racer.text)
-        myzip.append(str(i))
+#        racer=requests.get("http://service2:5001/randomnames")
+        racer=str(i*9) #prova
+        mydict.update({str(i): racer}) #prova
+#        mydict.update({str(i): racer.text})
 
-        mydict.update({str(i): racer.text})
-    winner=requests.get("http://service3:5002/winner")
-#    winner= str(5) #prova
+#    winner=requests.get("http://service3:5002/winner")
+    winner= str(5) #prova
 
-    racers.append(winner.text)
-    myzip.append(str(9))
-    mydict.update({str(9):winner.text})
+#    mydict.update({str(9):winner.text})
+    mydict.update({str(9):winner}) #prova
 
-#    jsonpost=json.dumps(mydict)
-
-#    mydict=dict(zip(myzip,racers))
-#    mydict={"1":"11", "2":"22", "3":"33", "4":"34", "5":"55", "6":"86", "7":"77", "8":"88", "9":"0"}
-#    mydict={myzip[0]:racers[0],myzip[1]:racers[1],myzip[2]:racers[2],myzip[3]:racers[3],myzip[4]:racers[4],myzip[5]:racers[5],myzip[6]:racers[6],myzip[7]:racers[7],myzip[8]:racers[8]}
-    response = requests.post("http://service4:6000/racelist", json=mydict)
+#    response = requests.post("http://service4:6000/racelist", json=mydict)
 #    response = requests.post("http://service4:6000/raceporco", json=mydict)
 
-    racedict=response.json()
+    racedict=mydict #prova
+#    racedict=response.json()
+    winnername=racedict.pop('9')
 
-#    return newdict["dio"]
-    return render_template("racepage.html", records=racedict.values())
-#    return render_template("racepage.html", records=racenames)
 
-#@app.route("/results/<int:bet>", methods=["GET", "POST"])
-#def results(bet):
-#    winner=int(request.get("http://service3:5002/winner"))
-#    if winner == bet 
-#        render template youwon.html
-#    if winner != bet
-#        render template youlost.html
+
+    return render_template("racepage.html", records=racedict.values(), name=winnername)
+
+@app.route("/results/<bet>", methods=["GET", "POST"])
+def results(bet):
+    betname=bet
+    if winnername == betname: 
+        message= "Congratulations! You won!"    
+    if winnername != betname:
+        message= "Sorry you lost."
+    return render_template("results.html", records=racedict.values(), message=message, name=winnername)
 
 
 if __name__=="__main__":
