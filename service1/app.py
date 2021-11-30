@@ -7,7 +7,6 @@ import json
 
 app = Flask(__name__)
 
-# Replace [PASSWORD] with the root password for your mysql container
 #password = getenv("DATABASE_PASSWORD")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ppword@db:3306/fives'
 
@@ -30,7 +29,7 @@ winnername=""
 @app.route('/hall')
 def hall():
   data1 = Winners.query.all()
-  return render_template('hall.html', data1=data1)
+  return render_template('hall.html', records=data1)
 
 @app.route("/", methods = ["GET", "POST"])
 def race():
@@ -66,7 +65,7 @@ def results(bet):
     db.session.add(newwinner)
     db.session.commit()
     if winnername == bet: 
-        message= "Congratulations! You won!"    
+        message= "Congratulations! You won!"
     if winnername != bet:
         message= "Sorry you lost."
     return render_template("results.html", records=racedict.values(), message=message, name=winnername)
