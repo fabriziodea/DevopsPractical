@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS winners
             (  
                     raceno INTEGER NOT NULL AUTO_INCREMENT,
                     name    VARCHAR(30) NOT NULL,
-                    PRIMARY KEY (raceno),
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    PRIMARY KEY (raceno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 LOCK TABLES `winners` WRITE;

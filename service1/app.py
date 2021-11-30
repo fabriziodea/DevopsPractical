@@ -6,32 +6,31 @@ import json
 
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 # Replace [PASSWORD] with the root password for your mysql container
-password = getenv("DATABASE_PASSWORD")
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{password}@fabsql:3306/fives'
+#password = getenv("DATABASE_PASSWORD")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ppword@db:3306/fives'
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 class Winners(db.Model):
 	raceno = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(30), nullable=False)
-    def __repr__(self):
-        return ''.join(['race number: ', str(self.raceno), '\r\n', 'Winner: 'self.name, '\n'])
 
-
-@app.route('/')
-def hello():
-  data1 = Winners.query.all()
-  return render_template('hall.html', data1=data1)
-
-if __name__=='__main__':
-  app.run(host='0.0.0.0', port=5000, debug=True)
-
-
+#db.drop_all()
+#db.create_all()
 
 
 racedict={}
 winnername=""
+
+@app.route('/hall')
+def hall():
+  data1 = Winners.query.all()
+  return render_template('hall.html', data1=data1)
 
 @app.route("/", methods = ["GET", "POST"])
 def race():
@@ -63,10 +62,12 @@ def race():
 
 @app.route("/results/<bet>", methods=["GET", "POST"])
 def results(bet):
-    betname=bet
-    if winnername == betname: 
+    newwinner= Winners(name=winnername)
+    db.session.add(newwinner)
+    db.session.commit()
+    if winnername == bet: 
         message= "Congratulations! You won!"    
-    if winnername != betname:
+    if winnername != bet:
         message= "Sorry you lost."
     return render_template("results.html", records=racedict.values(), message=message, name=winnername)
 
