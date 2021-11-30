@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   db:
     container_name: db
@@ -5,6 +6,10 @@ services:
     build: ./db
     environment:
       MYSQL_ROOT_PASSWORD: ppword
+    volumes:
+    - type: volume
+      source: myvolume
+      target: /var/lib/db
 #    healthcheck:
 #      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
 #      timeout: 20s
@@ -14,7 +19,7 @@ services:
     build: ./service1
     image: python-service1:latest
 #    depends_on:
-#      database:
+#      db:
 #        condition: service_healthy
     environment:
       DATABASE_PASSWORD: ppword
@@ -42,3 +47,5 @@ services:
     ports:
     - target: 5002
       published: 5002
+volumes:
+  myvolume:
