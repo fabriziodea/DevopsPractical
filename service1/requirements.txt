@@ -2,6 +2,7 @@ Flask
 Flask-SQLAlchemy
 SQLAlchemy
 requests
+requests_mock
 PyMySql
 flask_testing
 pytest
