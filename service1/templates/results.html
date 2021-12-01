@@ -84,7 +84,7 @@ body {
     </ul>
     <br><br>
     <center>
-        <p1><b>Donkey Race</b></p1>
+        <p1><b>{{creature}} Race</b></p1>
         </center>
         <br><br>
 
@@ -92,7 +92,7 @@ body {
 <table>
         {%  for record in records %} 
         <tr>
-                <td>{{record}} donkey  </td>
+                <td>{{record}} {{creature}}  </td>
 
               </tr>
         
@@ -102,7 +102,7 @@ body {
               <br><br>
               <center>
               <h2>{{message}}</h2>
-              <h2>The winner is {{name}} donkey</h2>
+              <h2>The winner is {{name}} {{creature}}</h2>
               </center>
 
               </body>

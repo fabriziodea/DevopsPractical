@@ -1,0 +1,6 @@
+Flask
+requests
+PyMySql
+flask_testing
+pytest
+pytest-cov

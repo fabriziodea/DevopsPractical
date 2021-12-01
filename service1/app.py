@@ -22,14 +22,14 @@ class Winners(db.Model):
 #db.drop_all()
 #db.create_all()
 
-
+creature="Donkey"
 racedict={}
 winnername=""
 
 @app.route('/hall')
 def hall():
   data1 = Winners.query.all()
-  return render_template('hall.html', records=data1)
+  return render_template('hall.html', records=data1, creature=creature)
 
 @app.route("/", methods = ["GET", "POST"])
 def race():
@@ -55,20 +55,19 @@ def race():
     racedict=response.json()
     winnername=racedict.pop('9')
 
-
-
-    return render_template("racepage.html", records=racedict.values(), name=winnername)
+    return render_template("racepage.html", records=racedict.values(), name=winnername, creature=creature)
 
 @app.route("/results/<bet>", methods=["GET", "POST"])
 def results(bet):
-    newwinner= Winners(name=winnername)
+    fame=winnername+' '+creature
+    newwinner= Winners(name=fame)
     db.session.add(newwinner)
     db.session.commit()
     if winnername == bet: 
         message= "Congratulations! You won!"
     if winnername != bet:
         message= "Sorry you lost."
-    return render_template("results.html", records=racedict.values(), message=message, name=winnername)
+    return render_template("results.html", records=racedict.values(), message=message, name=winnername, creature=creature)
 
 
 if __name__=="__main__":
