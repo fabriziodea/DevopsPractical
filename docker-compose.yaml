@@ -1,9 +1,24 @@
-version: '3.7'
+version: '3.8'
 services:
+  db:
+    container_name: db
+    image: db:latest
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: ppword
+    volumes:
+    - type: volume
+      source: myvolume
+      target: /var/lib/db
   service1:
     container_name: service1
     build: ./service1
     image: python-service1:latest
+#    depends_on:
+#      db:
+#        condition: service_healthy
+    environment:
+      DATABASE_PASSWORD: ppword
     ports:
     - target: 5000
       published: 5000
@@ -28,3 +43,5 @@ services:
     ports:
     - target: 5002
       published: 5002
+volumes:
+  myvolume:

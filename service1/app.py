@@ -1,13 +1,35 @@
 from flask import Flask, render_template, request, redirect, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from os import getenv
 import requests
 import json
 
 
 app = Flask(__name__)
 
+#password = getenv("DATABASE_PASSWORD")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ppword@db:3306/fives'
 
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Winners(db.Model):
+	raceno = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(30), nullable=False)
+
+#db.drop_all()
+#db.create_all()
+
+creature="Donkey"
 racedict={}
 winnername=""
+
+@app.route('/hall')
+def hall():
+  data1 = Winners.query.all()
+  return render_template('hall.html', records=data1, creature=creature)
 
 @app.route("/", methods = ["GET", "POST"])
 def race():
@@ -33,18 +55,19 @@ def race():
     racedict=response.json()
     winnername=racedict.pop('9')
 
-
-
-    return render_template("racepage.html", records=racedict.values(), name=winnername)
+    return render_template("racepage.html", records=racedict.values(), name=winnername, creature=creature)
 
 @app.route("/results/<bet>", methods=["GET", "POST"])
 def results(bet):
-    betname=bet
-    if winnername == betname: 
-        message= "Congratulations! You won!"    
-    if winnername != betname:
+    fame=winnername+' '+creature
+    newwinner= Winners(name=fame)
+    db.session.add(newwinner)
+    db.session.commit()
+    if winnername == bet: 
+        message= "Congratulations! You won!"
+    if winnername != bet:
         message= "Sorry you lost."
-    return render_template("results.html", records=racedict.values(), message=message, name=winnername)
+    return render_template("results.html", records=racedict.values(), message=message, name=winnername, creature=creature)
 
 
 if __name__=="__main__":

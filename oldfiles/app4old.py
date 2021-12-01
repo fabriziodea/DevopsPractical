@@ -6,11 +6,21 @@ colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", 
 
 app = Flask(__name__)
 
+@app.route("/raceporco", methods=['POST'])
+def race():
+    mydict = request.get_json()
+    mydict.update({'dio': 'madonna'})
+
+    return jsonify(mydict)
+
+
 @app.route("/racelist", methods=['POST'])
 def racelist():
 #    rawstring = request.get_json()['rawstring']
     mydict = request.get_json()
+    
 #    first= rawstring[0]
+
     i=1
     race=[]
     myzip=[]

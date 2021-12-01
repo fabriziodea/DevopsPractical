@@ -76,11 +76,11 @@ body {
 
 <body>
     <ul>
-      <li><a class="active" href="{{url_for('race')}}">Hall of fame</a></li>
+      <li><a class="active" href="{{url_for('hall')}}">Hall of fame</a></li>
     </ul>
     <br><br>
     <center>
-        <p1><b>Donkey Race</b></p1>
+        <p1><b>{{creature}} Race</b></p1>
         </center>
         <br><br>
 
@@ -88,7 +88,7 @@ body {
 <table>
         {%  for record in records %} 
         <tr>
-                <td>  {{record}} donkey  </td>
+                <td>  {{record}} {{creature}}  </td>
                 <td> <a href="{{ url_for('results', bet = record) }}" class="button">BET</a> </td>
 
               </tr>
