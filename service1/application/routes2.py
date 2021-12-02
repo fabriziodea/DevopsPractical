@@ -7,7 +7,7 @@ from application.models import Winners
 from application import app, db
 
 
-creature="Squirrel"
+creature="Donkey"
 racedict={}
 winnername=""
 
