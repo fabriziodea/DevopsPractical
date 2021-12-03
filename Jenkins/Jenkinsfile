@@ -6,5 +6,13 @@ pipeline {
                 sh "bash Jenkins/test.sh"
             }
         }
+        stage('Build and push images') {
+            steps {
+                sh "docker-compose build --parallel"
+                sh "docker login -u fabriziodea -p Strigazzi84?"
+                sh "docker-compose push"
+            }
+        }
+
     }
 }
