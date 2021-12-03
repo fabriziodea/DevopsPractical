@@ -2,8 +2,10 @@ version: '3.8'
 services:
   db:
     container_name: db
-    image: db:latest
+    image: fabriziodea/db:1
     build: ./db
+    deploy:
+      replicas: 2
     environment:
       MYSQL_ROOT_PASSWORD: ppword
     volumes:
@@ -13,7 +15,9 @@ services:
   service1:
     container_name: service1
     build: ./service1
-    image: python-service1:latest
+    image: fabriziodea/service1:S
+    deploy:
+      replicas: 1
 #    depends_on:
 #      db:
 #        condition: service_healthy
@@ -25,21 +29,27 @@ services:
   service4:
     container_name: service4
     build: ./service4
-    image: python-service4:latest
+    image: fabriziodea/service4:1
+    deploy:
+      replicas: 2
     ports:
     - target: 6000
       published: 6000
   service2:
     container_name: service2
     build: ./service2
-    image: python-service2:latest
+    image: fabriziodea/service2:1
+    deploy:
+      replicas: 2
     ports:
     - target: 5001
       published: 5001
   service3:
     container_name: service3
     build: ./service3
-    image: python-service3:latest
+    image: fabriziodea/service3:1
+    deploy:
+      replicas: 2
     ports:
     - target: 5002
       published: 5002

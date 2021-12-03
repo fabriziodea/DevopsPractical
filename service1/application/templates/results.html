@@ -61,22 +61,26 @@ th {
 }
 td {
   text-align: center;
+  padding: 15px
   border-bottom: 2px solid #ddd;
 }
 
 tr:hover {background-color: #90EE90;}
 
 body {
-  background-color: #00FFFF;
+  background-color: #F5F5DC;
 }
 
 
     </style>
 </head>
 
+
+
 <body>
     <ul>
-      <li><a class="active" href="{{url_for('hall')}}">Hall of fame</a></li>
+      <li><a class="active" href="{{url_for('hall')}}"">Hall of fame</a></li>
+      <li><a class="active" href="{{url_for('race')}}">Play Again</a></li>
     </ul>
     <br><br>
     <center>
@@ -88,8 +92,7 @@ body {
 <table>
         {%  for record in records %} 
         <tr>
-                <td>  {{record}} {{creature}}  </td>
-                <td> <a href="{{ url_for('results', bet = record) }}" class="button">BET</a> </td>
+                <td>{{record}} {{creature}}  </td>
 
               </tr>
         
@@ -97,7 +100,10 @@ body {
 
               </table>
               <br><br>
-
+              <center>
+              <h2>{{message}}</h2>
+              <h2>The winner is {{name}} {{creature}}</h2>
+              </center>
 
               </body>
               </html>
