@@ -8,22 +8,21 @@ pip3 install -r test-requirements.txt
 
 # Test Service1
 cd service1
-python3 -m pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
+python3 -m pytest --cov=application
 cd ..
 
 # Test Service2
 cd service2
-python3 -m pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
+python3 -m pytest --cov=application
 cd ..
 
 # Test Service3
 cd service3
-python3 -m pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
-cd ..
+python3 -m pytest --cov=application
 
 # Test Service4
 cd service4
-python3 -m pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
+python3 -m pytest --cov=application
 cd ..
 
 deactivate
