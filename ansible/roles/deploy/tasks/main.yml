@@ -1,0 +1,6 @@
+- name: "Deploy app"
+  docker_stack:
+    state: present
+    name: animalrace
+    compose:
+      - /home/jenkins/docker-compose.yaml

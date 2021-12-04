@@ -11,7 +11,7 @@ all:
         nginx:
 
   vars:
-    ansible_user: frizzolo
+    ansible_user: jenkins
     ansible_ssh_private_key_file: '~/.ssh/id_rsa'
     ansible_python_interpreter: "/usr/bin/python3"
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

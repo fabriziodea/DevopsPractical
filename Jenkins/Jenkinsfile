@@ -17,6 +17,14 @@ pipeline {
                 sh "docker-compose push"
             }
         }
+        stage('Deploy') {
+            steps {
+                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml swarmanager:/home/jenkins/docker-compose.yaml"
+                sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
+            }
+        }
+
+
 
     }
 }
