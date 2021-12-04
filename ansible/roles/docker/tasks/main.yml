@@ -28,4 +28,5 @@
       - docker-py
       - jsondiff
       - requests
+      - pyyaml
     executable: pip3
