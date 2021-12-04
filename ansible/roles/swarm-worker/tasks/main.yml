@@ -3,4 +3,4 @@
     state: join
     advertise_addr: swarmworker
     join_token: "{{ hostvars['swarmanager']['swarm_info']['swarm_facts']['JoinTokens']['Worker'] }}"
-    remote_addrs: [ swarmanager:2377 ]
+    remote_addrs: [ swarmanager]
