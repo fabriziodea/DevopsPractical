@@ -1,11 +1,5 @@
-=-=-=-=-=-=-=-=-=-=-=-=-=-
-## Contents:
-* [Project Brief](#Project-Brief)  
-* [App Design](#App-Design)
-* [CI Pipeline](#CI-Pipeline)  
-* [Risk Assessment](#Risk-Assessment)
-* [Testing](#Testing)
 
+photo to remove
 ![Jira Board1](https://github.com/fabriziodea/fabproj1/blob/master/Images/Jira%20Board.png)
 =-=-=-=-=-=-=-=-=-=-=-=-=-
 # DevOps Core Practical Project
@@ -16,6 +10,16 @@
 * The Application
 * Requests
 * Database Table Structure
+* Project Tracking
+* Risk Assessment
+* Version Control
+* Containerisation and Orchestration
+* Reverse Proxy
+* Unit Testing
+* CI Server
+* Dockerhub and Nexus
+* Ansible
+* Cloud Provider
 
 
 
@@ -45,6 +49,7 @@ My application is a race simulator, it generate 8 random names for the contender
 ## Requests
 Service 1 sends http get requests to Service 2 and 3 to retrieve the random values, then it sends a http post request to Service 4 to build a single race as shown below:
 !SERVICESXXXXXXX
+
 ## Database Table Structure
 The database saves the name of the winner for each race:
 !DATABASEXXXX
@@ -58,21 +63,58 @@ Here I show the Roadmap, Sprint board and Backlog when the project was ongoing:
 !Roadmap XXX
 
 ## Risk Assessment
-A risk assessment was created in order to monitor and plan for any potential risks that could jeopardise the project.
+A risk assessment was created in order to monitor any potential risks that could jeopardise the project.
 !RiskassessmentXXX
 
 ## Version Control
-I chose Git as a version control system. I made sure to create different branches and work on a dev branch everytime i was adding a new feature. Merging to the main branch when all known issues were solved. I also linked Github to Jira and i used smart commits to automatically update the Jira Board everytime a commit was modifying the state of the user stories in a sprint.
+I chose Git as a version control system. I made sure to create different branches and work on a dev branch everytime i was adding a new feature merging to the main branch when all known issues were solved. I also linked Github to Jira and i used smart commits to automatically update the Jira Board everytime a commit was modifying the state of the user stories in a sprint.
 Here there is the repository during the project and the branch diagram:
 !GitRepoxxx
 !GitBranchesxxx
 
+## Containerisation and Orchestration
+This is a distributed application where the services runs in separate containers and the containers are replicated on 2 Vms.
+This architecture improves the resilience of the application in case of failure.
+Docker swarm is used to orchestrate and manage the containers replica across the 2 Vms.
+
+## Reverse Proxy
+The ansible playbook sets up a VM as the reverse proxy using Nginx.
+This machine is reachable on port 80, it doesn't host the application but it forwards the traffic to 2 VMS hosting the application containers as shown in the diagram below.
+!NginxpicXXX
 
 
+## Unit Testing
+Unit testing for this project was carried out with Pytest.
+Each function within every route for every service is tested to verify the application handles and returns data as expected.
+Unit tests are triggered automatically with the Webhooks through Github after each push to the repository.
 
+## CI Server
+The CI Server is Jenkins, it creates a new build triggered via webhook fron Github after every commit. Jenkins is responsible of a number of tasks:
+* It runs automated tests for each service.
+* It builds images for each service and push them to Dockerhub, in order to make them available to all the VMs requiring the service images.
+* It transfer the docker-compose.yaml file to the Swarm manager node,
+* It runs the Ansible playbook, where it provisions the software and the dependencies required to each VMs involved with the application.
+* Once all the VMs have the required software and the images are available on Dockerhub it deploys the application.
 
+Here is a picture of the Jenkins pipeline:
 
+## Dockerhub and Nexus
+The services images are available on a public repository at https://hub.docker.com/.
+Since there was no requirement for confidentiality or high performance Dockerhub was my choice as image repository.
+If I had the need to access the repository quicker a solution could be Nexus. Nexus is a repository manager that can be installed on a local server, cutting down access time and improving confidentiality since the repository would be private.
+It also has a system to cache commonly used images to speed up deployment.
 
+## Ansible
+Ansible was used as software provisioning and configuration management tool.
+The playbook installs Docker on the VMS hosting the containers, initiate Docker Swarm on the manager node and it passes the token to worker node to join the swarm. It also install nginx on the VM acting as a load balancer
+Finally it deploys the application running the Docker stack deploy command on the Swarm manager node.
+
+## Cloud provider
+Google cloud platform is the cloud provider i used for this project.
+Moving the application on the cloud offers many advantages.
+It allowes greater scalability by giving the possibility to add more virtual machines and more replicas.
+It makes the application more resistant in case of failure.
+It allows automatic updates with no or little down time.
 
 
 
