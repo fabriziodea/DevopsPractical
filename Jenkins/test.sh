@@ -19,6 +19,7 @@ cd ..
 # Test Service3
 cd service3
 python3 -m pytest --cov=application
+cd ..
 
 # Test Service4
 cd service4
