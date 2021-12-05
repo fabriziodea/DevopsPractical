@@ -5,7 +5,7 @@ import requests
 import json
 
 adjective=["Mean", "Friendly", "Aggressive", "Smart", "Quiet", "Noisy", "Dangerous", "Stubborn", "Dirty", "Solitary"]
-colour=["white", "yellow", "green", "orange", "red", "brown", "pink", "purple", "blue", "black"]
+colour=["White", "Yellow", "Green", "Orange", "Red", "Brown", "Pink", "Purple", "Blue", "Black"]
 
 @app.route("/racelist", methods=['POST'])
 def racelist():

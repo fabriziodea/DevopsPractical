@@ -15,7 +15,7 @@ services:
   service1:
     container_name: service1
     build: ./service1
-    image: fabriziodea/service1:S
+    image: fabriziodea/service1:D
     deploy:
       replicas: 1
 #    depends_on:
@@ -25,16 +25,7 @@ services:
       DATABASE_PASSWORD: ppword
     ports:
     - target: 5000
-      published: 5000
-  service4:
-    container_name: service4
-    build: ./service4
-    image: fabriziodea/service4:1
-    deploy:
-      replicas: 2
-    ports:
-    - target: 6000
-      published: 6000
+      published: 5000  
   service2:
     container_name: service2
     build: ./service2
@@ -53,5 +44,14 @@ services:
     ports:
     - target: 5002
       published: 5002
+  service4:
+    container_name: service4
+    build: ./service4
+    image: fabriziodea/service4:1
+    deploy:
+      replicas: 2
+    ports:
+    - target: 6000
+      published: 6000
 volumes:
   myvolume:
