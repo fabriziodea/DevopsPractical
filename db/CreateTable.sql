@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS winners
 
 LOCK TABLES `winners` WRITE;
 /*!40000 ALTER TABLE `winners` DISABLE KEYS */;
-INSERT INTO `winners` VALUES (1,'Legacy winner Donkey');
+INSERT INTO `winners` VALUES (1,'Legacy Winner Donkey');
 /*!40000 ALTER TABLE `winners` ENABLE KEYS */;
 UNLOCK TABLES;
 

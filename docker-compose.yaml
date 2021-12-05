@@ -17,7 +17,7 @@ services:
     build: ./service1
     image: fabriziodea/service1:D
     deploy:
-      replicas: 1
+      replicas: 3
 #    depends_on:
 #      db:
 #        condition: service_healthy
@@ -49,7 +49,7 @@ services:
     build: ./service4
     image: fabriziodea/service4:1
     deploy:
-      replicas: 2
+      replicas: 3
     ports:
     - target: 6000
       published: 6000

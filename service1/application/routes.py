@@ -8,7 +8,7 @@ from application.models import Winners
 from application import app, db
 
 
-creature="Donkey"
+creature="Squirrel"
 
 @app.route('/hall')
 def hall():

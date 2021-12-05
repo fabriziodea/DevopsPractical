@@ -14,5 +14,5 @@ class TestResp(TestBase):
 
 
         self.assertIn(b'Smart', response.data)
-        self.assertIn(b'red', response.data)
+        self.assertIn(b'Red', response.data)
         self.assertEqual(response.status_code, 200)

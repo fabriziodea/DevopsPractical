@@ -12,7 +12,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-        db.session.add(Winners(name='old yellow beast'))
+        db.session.add(Winners(name='Old Yellow Squirrel'))
         db.session.commit()
     
     def tearDown(self):
@@ -25,27 +25,27 @@ class TestResp(TestBase):
             g.get("http://service2:5001/randomnames", text = "25")
             g.get("http://service3:5002/winner", text = "6")
 
-            dict={'1':'Noisy purple', '2':'Mean green', '3':'Smart blue', '4':'Noisy blue', '5':'Stubborn red', '6':'Quiet green', '7':'Dangerous blue', '8':'Noisy yellow', '9':'Dangerous blue'}
+            dict={'1':'Noisy Purple', '2':'Mean Green', '3':'Smart Blue', '4':'Noisy Blue', '5':'Stubborn Red', '6':'Quiet Green', '7':'Dangerous Blue', '8':'Noisy Yellow', '9':'Dangerous Blue'}
             g.post("http://service4:6000/racelist", json=dict)
             
             response = self.client.get(url_for('race'))
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Race', response.data)
-            self.assertIn(b'Smart blue', response.data)
-            self.assertIn(b'Stubborn red', response.data)
+            self.assertIn(b'Smart Blue', response.data)
+            self.assertIn(b'Stubborn Red', response.data)
 
     def test_hall(self):
         response = self.client.get(url_for('hall'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'old', response.data)
+        self.assertIn(b'Old', response.data)
 
     def test_results_lost(self):
-        response = self.client.get(url_for('results', bet='Fast red'))
+        response = self.client.get(url_for('results', bet='Fast Red'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Sorry', response.data)
 
     def test_results_won(self):
-        response = self.client.get(url_for('results', bet='Dangerous blue'))
+        response = self.client.get(url_for('results', bet='Old Yellow'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Congratulations', response.data)
 
