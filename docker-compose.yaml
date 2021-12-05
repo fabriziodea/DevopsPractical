@@ -15,7 +15,7 @@ services:
   service1:
     container_name: service1
     build: ./service1
-    image: fabriziodea/service1:S
+    image: fabriziodea/service1:D
     deploy:
       replicas: 3
 #    depends_on:
