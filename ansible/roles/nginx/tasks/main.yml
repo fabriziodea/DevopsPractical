@@ -1,0 +1,16 @@
+- name: Install NGINX
+  apt:
+    pkg:
+    - nginx
+    state: latest
+    update_cache: true
+- name: Copy nginx.conf
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    force: yes
+- name: Start NGINX
+  service:
+    name: nginx
+    state: started
+# tasks file for nginx

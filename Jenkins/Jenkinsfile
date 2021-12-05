@@ -6,5 +6,25 @@ pipeline {
                 sh "bash Jenkins/test.sh"
             }
         }
+        stage('Build and push images') {
+            environment {
+                DOCKER_USER = credentials('docker_user')
+                DOCKER_PWORD = credentials('docker_pword')
+            }
+            steps {
+                sh "docker-compose build --parallel"
+                sh "docker login -u $DOCKER_USER -p $DOCKER_PWORD"
+                sh "docker-compose push"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml swarmanager:/home/jenkins/docker-compose.yaml"
+                sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
+            }
+        }
+
+
+
     }
 }
