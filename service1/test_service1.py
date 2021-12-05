@@ -12,7 +12,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-        db.session.add(Winners(name='Old Yellow Donkey'))
+        db.session.add(Winners(name='Old Yellow Squirrel'))
         db.session.commit()
     
     def tearDown(self):
