@@ -1,9 +1,4 @@
-
-photo to remove
-![Jira Board1](https://github.com/fabriziodea/fabproj1/blob/master/Images/Jira%20Board.png)
-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # DevOps Core Practical Project
-
 
 ## Contents:
 * Project Brief 
@@ -20,8 +15,6 @@ photo to remove
 * Dockerhub and Nexus
 * Ansible
 * Cloud Provider
-
-
 
 ## Project Brief
 This project required the creation of a service-orientated architecture for an application composed of at least 4 services that work together.
@@ -48,29 +41,29 @@ My application is a race simulator, it generate 8 random names for the contender
 
 ## Requests
 Service 1 sends http get requests to Service 2 and 3 to retrieve the random values, then it sends a http post request to Service 4 to build a single race as shown below:
-!SERVICESXXXXXXX
+![Services](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Services.png)
 
 ## Database Table Structure
 The database saves the name of the winner for each race:
-!DATABASEXXXX
+![Database](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Database.png)
 
 ## Project Tracking
 I chose Jira as project tracking tool, I created Epics to indicate the main areas I needed to work on, I broke down the epics in user stories and I subsequently added user stories to sprints.
 This was very useful to have a clear views of the issues that needed attention and to prioritise appropriately the most urgent tasks.
 Here I show the Roadmap, Sprint board and Backlog when the project was ongoing:
-!BacklogXXX
-!Board XXX
-!Roadmap XXX
+![Backlog](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/backlog.png)
+![Board](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Board2.png)
+![Roadmap](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Roadmap.png)
 
 ## Risk Assessment
 A risk assessment was created in order to monitor any potential risks that could jeopardise the project.
-!RiskassessmentXXX
+![Risk Assessment](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/RiskAssessment.png)
 
 ## Version Control
 I chose Git as a version control system. I made sure to create different branches and work on a dev branch everytime i was adding a new feature merging to the main branch when all known issues were solved. I also linked Github to Jira and i used smart commits to automatically update the Jira Board everytime a commit was modifying the state of the user stories in a sprint.
 Here there is the repository during the project and the branch diagram:
-!GitRepoxxx
-!GitBranchesxxx
+![GitRepo](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Git1.png)
+![Branches](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Branches.png)
 
 ## Containerisation and Orchestration
 This is a distributed application where the services runs in separate containers and the containers are replicated on 2 Vms.
@@ -80,13 +73,13 @@ Docker swarm is used to orchestrate and manage the containers replica across the
 ## Reverse Proxy
 The ansible playbook sets up a VM as the reverse proxy using Nginx.
 This machine is reachable on port 80, it doesn't host the application but it forwards the traffic to 2 VMS hosting the application containers as shown in the diagram below.
-!NginxpicXXX
-
+![NGINX](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Nginx.png)
 
 ## Unit Testing
 Unit testing for this project was carried out with Pytest.
 Each function within every route for every service is tested to verify the application handles and returns data as expected.
 Unit tests are triggered automatically with the Webhooks through Github after each push to the repository.
+All tests covered 100% and passed.
 
 ## CI Server
 The CI Server is Jenkins, it creates a new build triggered via webhook fron Github after every commit. Jenkins is responsible of a number of tasks:
@@ -95,8 +88,6 @@ The CI Server is Jenkins, it creates a new build triggered via webhook fron Gith
 * It transfer the docker-compose.yaml file to the Swarm manager node,
 * It runs the Ansible playbook, where it provisions the software and the dependencies required to each VMs involved with the application.
 * Once all the VMs have the required software and the images are available on Dockerhub it deploys the application.
-
-Here is a picture of the Jenkins pipeline:
 
 ## Dockerhub and Nexus
 The services images are available on a public repository at https://hub.docker.com/.
@@ -115,6 +106,3 @@ Moving the application on the cloud offers many advantages.
 It allowes greater scalability by giving the possibility to add more virtual machines and more replicas.
 It makes the application more resistant in case of failure.
 It allows automatic updates with no or little down time.
-
-
-
