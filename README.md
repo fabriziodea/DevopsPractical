@@ -80,6 +80,8 @@ Unit testing for this project was carried out with Pytest.
 Each function within every route for every service is tested to verify the application handles and returns data as expected.
 Unit tests are triggered automatically with the Webhooks through Github after each push to the repository.
 All tests covered 100% and passed.
+![test1and2](https://github.com/fabriziodea/DevopsPractical/blob/main/Tests1and2.png)
+![test3and4](https://github.com/fabriziodea/DevopsPractical/blob/main/Tests3and4.png)
 
 ## CI Server
 The CI Server is Jenkins, it creates a new build triggered via webhook fron Github after every commit. Jenkins is responsible of a number of tasks:
@@ -89,6 +91,8 @@ The CI Server is Jenkins, it creates a new build triggered via webhook fron Gith
 * It runs the Ansible playbook, where it provisions the software and the dependencies required to each VMs involved with the application.
 * Once all the VMs have the required software and the images are available on Dockerhub it deploys the application.
 
+![JenkinsPipeline](https://github.com/fabriziodea/DevopsPractical/blob/main/Jenkins%20Pipeline.png)
+
 ## Dockerhub and Nexus
 The services images are available on a public repository at https://hub.docker.com/.
 Since there was no requirement for confidentiality or high performance Dockerhub was my choice as image repository.
@@ -97,8 +101,12 @@ It also has a system to cache commonly used images to speed up deployment.
 
 ## Ansible
 Ansible was used as software provisioning and configuration management tool.
-The playbook installs Docker on the VMS hosting the containers, initiate Docker Swarm on the manager node and it passes the token to worker node to join the swarm. It also install nginx on the VM acting as a load balancer
+The playbook installs Docker on the VMS hosting the containers, initiate Docker Swarm on the manager node and it passes the token to worker node to join the swarm. It also install nginx on the VM acting as a load balancer.
 Finally it deploys the application running the Docker stack deploy command on the Swarm manager node.
+![Ansible](https://github.com/fabriziodea/DevopsPractical/blob/main/AllVms.png)
+
+Here there is a short video of Ansible installing Java, Jenkins and Nginx
+[Ansible video](https://www.youtube.com/watch?v=BILPt6lXa3c)
 
 ## Cloud provider
 Google cloud platform is the cloud provider i used for this project.
@@ -106,3 +114,6 @@ Moving the application on the cloud offers many advantages.
 It allows greater scalability by giving the possibility to add more virtual machines and more replicas.
 It makes the application more resistant in case of failure.
 It allows automatic updates with no or little down time.
+
+## Future Improvements
+At the moment the database password is hardcoded and it is not passed to the app as an environment variable. Passing the database password as an environment variable would improve the security so i plan to implement it when i have more time.
