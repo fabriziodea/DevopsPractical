@@ -68,7 +68,7 @@ Here there is the repository during the project and the branch diagram:
 ## Containerisation and Orchestration
 This is a distributed application where the services runs in separate containers and the containers are replicated on 2 Vms.
 This architecture improves the resilience of the application in case of failure.
-Docker swarm is used to orchestrate and manage the containers replica across the 2 Vms.
+Docker swarm is used to orchestrate and manage the containers replicas across the 2 Vms.
 
 ## Reverse Proxy
 The ansible playbook sets up a VM as the reverse proxy using Nginx.
@@ -103,6 +103,6 @@ Finally it deploys the application running the Docker stack deploy command on th
 ## Cloud provider
 Google cloud platform is the cloud provider i used for this project.
 Moving the application on the cloud offers many advantages.
-It allowes greater scalability by giving the possibility to add more virtual machines and more replicas.
+It allows greater scalability by giving the possibility to add more virtual machines and more replicas.
 It makes the application more resistant in case of failure.
 It allows automatic updates with no or little down time.
