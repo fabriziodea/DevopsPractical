@@ -10,7 +10,7 @@ class TestBase(TestCase):
 class TestResp(TestBase):
     def test_names(self):
         with patch('random.randint') as r:
-            r.return_value.int = 2
+            r.return_value.text = "2"
             response = self.client.get(url_for('random_names'))
             self.assertEqual(response.status_code, 200)
-#            self.assertIn(b'2', response.data)
+            self.assertIn(b'2', response.data)
