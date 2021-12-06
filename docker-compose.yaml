@@ -5,7 +5,7 @@ services:
     image: fabriziodea/db:1
     build: ./db
     deploy:
-      replicas: 2
+      replicas: 1
     environment:
       MYSQL_ROOT_PASSWORD: ppword
     volumes:
@@ -49,7 +49,7 @@ services:
     build: ./service4
     image: fabriziodea/service4:1
     deploy:
-      replicas: 3
+      replicas: 2
     ports:
     - target: 6000
       published: 6000

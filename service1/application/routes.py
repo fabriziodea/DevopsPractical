@@ -47,4 +47,4 @@ def results(bet):
         message= "Congratulations! You won!"
     if winnername != betname:
         message= "Sorry you lost."
-    return render_template("results.html", message=message, name=winnername)
+    return render_template("results.html", message=message, name=winnername, creature=creature)
