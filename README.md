@@ -72,7 +72,7 @@ Docker swarm is used to orchestrate and manage the containers replicas across th
 
 ## Reverse Proxy
 The ansible playbook sets up a VM as the reverse proxy using Nginx.
-This machine is reachable on port 80, it doesn't host the application but it forwards the traffic to 2 VMS hosting the application containers as shown in the diagram below.
+This machine is reachable on port 80, it doesn't host the application but it forwards the traffic to 2 VMS hosting the application containers as shown in the diagram below:
 ![NGINX](https://github.com/fabriziodea/DevopsPractical/blob/main/Images/Nginx.png)
 
 ## Unit Testing
